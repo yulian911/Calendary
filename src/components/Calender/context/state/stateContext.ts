@@ -1,12 +1,7 @@
-import pl from "date-fns/locale/pl";
-import { createContext } from "react";
-import { View } from "../../components/nav/Navigation";
-import {
-  DefaultRecourse,
-  EventActions,
-  ProcessedEvent,
-  SchedulerProps,
-} from "../../types";
+import pl from 'date-fns/locale/pl';
+import { createContext } from 'react';
+import { View } from '../../components/nav/Navigation';
+import { DefaultRecourse, EventActions, ProcessedEvent, SchedulerProps } from '../../types';
 
 export type SelectedRange = { start: Date; end: Date };
 export interface SchedulerState extends SchedulerProps {
@@ -14,13 +9,10 @@ export interface SchedulerState extends SchedulerProps {
   dialog: boolean;
   selectedRange?: SelectedRange;
   selectedEvent?: ProcessedEvent;
-  selectedResource?: DefaultRecourse["assignee"];
+  selectedResource?: DefaultRecourse['assignee'];
 }
 export interface stateContext extends SchedulerState {
-  handleState(
-    value: SchedulerState[keyof SchedulerState],
-    name: keyof SchedulerState
-  ): void;
+  handleState(value: SchedulerState[keyof SchedulerState], name: keyof SchedulerState): void;
   getViews(): View[];
   triggerDialog(status: boolean, event?: SelectedRange | ProcessedEvent): void;
   triggerLoading(status: boolean): void;
@@ -30,7 +22,7 @@ export interface stateContext extends SchedulerState {
     eventId: string,
     droppedStartTime: Date,
     resourceKey?: string,
-    resourceVal?: string | number
+    resourceVal?: string | number,
   ): void;
 }
 
@@ -43,8 +35,8 @@ export const defaultProps = {
     endHour: 17,
   },
   week: {
-    weekDays: [0, 1, 2, 3, 4, 5],
-    weekStartOn: 6,
+    weekDays: [0, 1, 2, 3, 4, 5, 6],
+    weekStartOn: 1,
     startHour: 9,
     endHour: 17,
     step: 60,
@@ -54,7 +46,7 @@ export const defaultProps = {
     endHour: 17,
     step: 60,
   },
-  view: "week",
+  view: 'week',
   selectedDate: new Date(),
   events: [],
   remoteEvents: undefined,
@@ -66,16 +58,16 @@ export const defaultProps = {
   viewerExtraComponent: undefined,
   resources: [],
   resourceFields: {
-    idField: "assignee",
-    textField: "text",
-    subTextField: "subtext",
-    avatarField: "avatar",
-    colorField: "color",
+    idField: 'assignee',
+    textField: 'text',
+    subTextField: 'subtext',
+    avatarField: 'avatar',
+    colorField: 'color',
   },
   recourseHeaderComponent: undefined,
-  resourceViewMode: "default",
-  direction: "ltr",
-  dialogMaxWidth: "md",
+  resourceViewMode: 'default',
+  direction: 'ltr',
+  dialogMaxWidth: 'md',
   locale: pl,
 } as SchedulerProps;
 

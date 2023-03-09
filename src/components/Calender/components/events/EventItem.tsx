@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState } from 'react';
 import {
   Popover,
   Typography,
@@ -8,18 +8,18 @@ import {
   Button,
   Slide,
   Paper,
-} from "@mui/material";
-import { format } from "date-fns";
-import { ProcessedEvent } from "../../types";
-import { useAppState } from "../../hooks/useAppState";
-import ArrowRightRoundedIcon from "@mui/icons-material/ArrowRightRounded";
-import ArrowLeftRoundedIcon from "@mui/icons-material/ArrowLeftRounded";
-import EditRoundedIcon from "@mui/icons-material/EditRounded";
-import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
-import EventNoteRoundedIcon from "@mui/icons-material/EventNoteRounded";
-import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
-import SupervisorAccountRoundedIcon from "@mui/icons-material/SupervisorAccountRounded";
-import { PopperInner } from "../../styles/styles";
+} from '@mui/material';
+import { format } from 'date-fns';
+import { ProcessedEvent } from '../../types';
+import { useAppState } from '../../hooks/useAppState';
+import ArrowRightRoundedIcon from '@mui/icons-material/ArrowRightRounded';
+import ArrowLeftRoundedIcon from '@mui/icons-material/ArrowLeftRounded';
+import EditRoundedIcon from '@mui/icons-material/EditRounded';
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded';
+import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
+import SupervisorAccountRoundedIcon from '@mui/icons-material/SupervisorAccountRounded';
+import { PopperInner } from '../../styles/styles';
 
 interface EventItemProps {
   event: ProcessedEvent;
@@ -29,13 +29,7 @@ interface EventItemProps {
   showdate?: boolean;
 }
 
-const EventItem = ({
-  event,
-  multiday,
-  hasPrev,
-  hasNext,
-  showdate,
-}: EventItemProps) => {
+const EventItem = ({ event, multiday, hasPrev, hasNext, showdate }: EventItemProps) => {
   const {
     triggerDialog,
     onDelete,
@@ -54,10 +48,8 @@ const EventItem = ({
   const [deleteConfirm, setDeleteConfirm] = useState(false);
   const theme = useTheme();
 
-  const NextArrow =
-    direction === "rtl" ? ArrowLeftRoundedIcon : ArrowRightRoundedIcon;
-  const PrevArrow =
-    direction === "rtl" ? ArrowRightRoundedIcon : ArrowLeftRoundedIcon;
+  const NextArrow = direction === 'rtl' ? ArrowLeftRoundedIcon : ArrowRightRoundedIcon;
+  const PrevArrow = direction === 'rtl' ? ArrowRightRoundedIcon : ArrowLeftRoundedIcon;
 
   const triggerViewer = (el?: Element) => {
     if (!el && deleteConfirm) {
@@ -76,12 +68,12 @@ const EventItem = ({
         if (remoteId) {
           deletedId = remoteId;
         } else {
-          deletedId = "";
+          deletedId = '';
         }
       }
       if (deletedId) {
-        const updatedEvents = events.filter((e) => e.event_id !== deletedId);
-        handleState(updatedEvents, "events");
+        const updatedEvents = events.filter(e => e.event_id !== deletedId);
+        handleState(updatedEvents, 'events');
         triggerViewer();
       }
     } catch (error) {
@@ -98,9 +90,9 @@ const EventItem = ({
       </Typography>
       {showdate && (
         <Typography style={{ fontSize: 11 }} noWrap>
-          {`${format(event.start, "hh:mm a", {
+          {`${format(event.start, 'hh:mm a', {
             locale: locale,
-          })} - ${format(event.end, "hh:mm a", { locale: locale })}`}
+          })} - ${format(event.end, 'hh:mm a', { locale: locale })}`}
         </Typography>
       )}
     </div>
@@ -111,31 +103,25 @@ const EventItem = ({
       <div
         style={{
           padding: 2,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}>
         <Typography sx={{ fontSize: 11 }} noWrap>
           {hasPrev ? (
-            <PrevArrow fontSize="small" sx={{ display: "flex" }} />
+            <PrevArrow fontSize="small" sx={{ display: 'flex' }} />
           ) : (
-            showdate && format(event.start, "hh:mm a", { locale: locale })
+            showdate && format(event.start, 'hh:mm a', { locale: locale })
           )}
         </Typography>
-        <Typography
-          variant="subtitle2"
-          align="center"
-          sx={{ fontSize: 12 }}
-          noWrap
-        >
+        <Typography variant="subtitle2" align="center" sx={{ fontSize: 12 }} noWrap>
           {event.title}
         </Typography>
         <Typography sx={{ fontSize: 11 }} noWrap>
           {hasNext ? (
-            <NextArrow fontSize="small" sx={{ display: "flex" }} />
+            <NextArrow fontSize="small" sx={{ display: 'flex' }} />
           ) : (
-            showdate && format(event.end, "hh:mm a", { locale: locale })
+            showdate && format(event.end, 'hh:mm a', { locale: locale })
           )}
         </Typography>
       </div>
@@ -144,10 +130,8 @@ const EventItem = ({
 
   const renderViewer = () => {
     const idKey = resourceFields.idField;
-    const hasResource = resources.filter((res) =>
-      Array.isArray(event[idKey])
-        ? event[idKey].includes(res[idKey])
-        : res[idKey] === event[idKey]
+    const hasResource = resources.filter(res =>
+      Array.isArray(event[idKey]) ? event[idKey].includes(res[idKey]) : res[idKey] === event[idKey],
     );
 
     return (
@@ -156,8 +140,7 @@ const EventItem = ({
           style={{
             background: event.color || theme.palette.primary.main,
             color: theme.palette.primary.contrastText,
-          }}
-        >
+          }}>
           <div className="rs__popper_actions">
             <div>
               <IconButton
@@ -165,50 +148,44 @@ const EventItem = ({
                 style={{ color: theme.palette.primary.contrastText }}
                 onClick={() => {
                   triggerViewer();
-                }}
-              >
+                }}>
                 <ClearRoundedIcon color="disabled" />
               </IconButton>
             </div>
-            <div style={{ display: "inherit" }}>
+            <div style={{ display: 'inherit' }}>
               <IconButton
                 size="small"
                 style={{ color: theme.palette.primary.contrastText }}
                 onClick={() => {
                   triggerViewer();
                   triggerDialog(true, event);
-                }}
-              >
+                }}>
                 <EditRoundedIcon />
               </IconButton>
               {!deleteConfirm && (
                 <IconButton
                   size="small"
                   style={{ color: theme.palette.primary.contrastText }}
-                  onClick={() => setDeleteConfirm(true)}
-                >
+                  onClick={() => setDeleteConfirm(true)}>
                   <DeleteRoundedIcon />
                 </IconButton>
               )}
               <Slide
                 in={deleteConfirm}
-                direction={direction === "rtl" ? "right" : "left"}
+                direction={direction === 'rtl' ? 'right' : 'left'}
                 mountOnEnter
-                unmountOnExit
-              >
+                unmountOnExit>
                 <div>
                   <Button
                     style={{ color: theme.palette.error.main }}
                     size="small"
-                    onClick={handleConfirmDelete}
-                  >
+                    onClick={handleConfirmDelete}>
                     DELETE
                   </Button>
                   <Button
                     style={{ color: theme.palette.action.disabled }}
                     size="small"
-                    onClick={() => setDeleteConfirm(false)}
-                  >
+                    onClick={() => setDeleteConfirm(false)}>
                     CANCEL
                   </Button>
                 </div>
@@ -218,36 +195,32 @@ const EventItem = ({
           {viewerTitleComponent instanceof Function ? (
             viewerTitleComponent(event)
           ) : (
-            <Typography style={{ padding: "5px 0" }} noWrap>
+            <Typography style={{ padding: '5px 0' }} noWrap>
               {event.title}
             </Typography>
           )}
         </div>
-        <div style={{ padding: "5px 10px" }}>
+        <div style={{ padding: '5px 10px' }}>
           <Typography
-            style={{ display: "flex", alignItems: "center" }}
+            style={{ display: 'flex', alignItems: 'center' }}
             color="textSecondary"
             variant="caption"
-            noWrap
-          >
-            <EventNoteRoundedIcon />{" "}
-            {`${format(event.start, "dd MMMM yyyy hh:mm a", {
+            noWrap>
+            <EventNoteRoundedIcon />{' '}
+            {`${format(event.start, 'dd MMMM yyyy hh:mm a', {
               locale: locale,
-            })} - ${format(event.end, "dd MMMM yyyy hh:mm a", {
+            })} - ${format(event.end, 'dd MMMM yyyy hh:mm a', {
               locale: locale,
             })}`}
           </Typography>
           {hasResource.length > 0 && (
             <Typography
-              style={{ display: "flex", alignItems: "center" }}
+              style={{ display: 'flex', alignItems: 'center' }}
               color="textSecondary"
               variant="caption"
-              noWrap
-            >
-              <SupervisorAccountRoundedIcon />{" "}
-              {hasResource
-                .map((res) => res[resourceFields.textField])
-                .join(", ")}
+              noWrap>
+              <SupervisorAccountRoundedIcon />{' '}
+              {hasResource.map(res => res[resourceFields.textField]).join(', ')}
             </Typography>
           )}
           {viewerExtraComponent instanceof Function
@@ -262,56 +235,48 @@ const EventItem = ({
     <Fragment>
       <Paper
         style={{
-          width: "100%",
-          height: "100%",
-          display: "block",
-          background: event.disabled
-            ? "#d0d0d0"
-            : event.color || theme.palette.primary.main,
-          color: event.disabled
-            ? "#808080"
-            : theme.palette.primary.contrastText,
-          cursor: event.disabled ? "not-allowed" : "pointer",
-          overflow: "hidden",
-        }}
-      >
+          width: '100%',
+          height: '100%',
+          display: 'block',
+          background: event.disabled ? '#d0d0d0' : event.color || theme.palette.primary.main,
+          color: event.disabled ? '#808080' : theme.palette.primary.contrastText,
+          cursor: event.disabled ? 'not-allowed' : 'pointer',
+          overflow: 'hidden',
+        }}>
         <ButtonBase
-          onClick={(e) => {
+          onClick={e => {
             e.preventDefault();
             e.stopPropagation();
             triggerViewer(e.currentTarget);
           }}
           disabled={event.disabled}
           style={{
-            width: "100%",
-            height: "100%",
-            display: "block",
-          }}
-        >
+            width: '100%',
+            height: '100%',
+            display: 'block',
+          }}>
           <div
             style={{
-              height: "100%",
+              height: '100%',
               // background:'red'
             }}
             draggable
-            onDragStart={(e) => {
+            onDragStart={e => {
               e.stopPropagation();
-              e.dataTransfer.setData("text/plain", `${event.event_id}`);
+              e.dataTransfer.setData('text/plain', `${event.event_id}`);
               e.currentTarget.style.backgroundColor = theme.palette.error.main;
             }}
-            onDragEnd={(e) => {
-              e.currentTarget.style.backgroundColor =
-                event.color || theme.palette.primary.main;
+            onDragEnd={e => {
+              e.currentTarget.style.backgroundColor = event.color || theme.palette.primary.main;
             }}
-            onDragOver={(e) => {
+            onDragOver={e => {
               e.stopPropagation();
               e.preventDefault();
             }}
-            onDragEnter={(e) => {
+            onDragEnter={e => {
               e.stopPropagation();
               e.preventDefault();
-            }}
-          >
+            }}>
             {item}
           </div>
         </ButtonBase>
@@ -321,21 +286,20 @@ const EventItem = ({
       <Popover
         open={Boolean(anchorEl)}
         anchorEl={anchorEl}
-        onClose={(e) => {
+        onClose={e => {
           triggerViewer();
         }}
         anchorOrigin={{
-          vertical: "center",
-          horizontal: "center",
+          vertical: 'center',
+          horizontal: 'center',
         }}
         transformOrigin={{
-          vertical: "top",
-          horizontal: "center",
+          vertical: 'top',
+          horizontal: 'center',
         }}
-        onClick={(e) => {
+        onClick={e => {
           e.stopPropagation();
-        }}
-      >
+        }}>
         {renderViewer()}
       </Popover>
     </Fragment>

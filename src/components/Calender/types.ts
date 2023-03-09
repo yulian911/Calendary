@@ -1,11 +1,11 @@
-import { DayProps } from "./views/Day";
-import { StateItem } from "./views/Editor";
-import { MonthProps } from "./views/Month";
-import { WeekProps } from "./views/Week";
-import { DialogProps, GridSize } from "@mui/material";
-import { Locale } from "date-fns";
-import { SelectOption } from "./components/inputs/SelectInput";
-import { View } from "./components/nav/Navigation";
+import { DayProps } from './views/Day';
+import { StateItem } from './views/Editor';
+import { MonthProps } from './views/Month';
+import { WeekProps } from './views/Week';
+import { DialogProps, GridSize } from '@mui/material';
+import { Locale } from 'date-fns';
+import { SelectOption } from './components/inputs/SelectInput';
+import { View } from './components/nav/Navigation';
 
 export type DayHours =
   | 0
@@ -47,7 +47,7 @@ interface CalendarEvent {
   // description?: string;
 }
 
-export type InputTypes = "input" | "date" | "select" | "hidden";
+export type InputTypes = 'input' | 'date' | 'select' | 'hidden';
 export interface FieldInputProps {
   /** Available to all InputTypes */
   label?: string;
@@ -60,7 +60,7 @@ export interface FieldInputProps {
   /** Available to all InputTypes
    * @default "outline"
    */
-  variant?: "standard" | "filled" | "outlined";
+  variant?: 'standard' | 'filled' | 'outlined';
   /** Available to all InputTypes */
   disabled?: boolean;
 
@@ -79,16 +79,16 @@ export interface FieldInputProps {
   /** Available when @input="date" ONLY
    * @default "datetime"
    */
-  type?: "date" | "datetime";
+  type?: 'date' | 'datetime';
   /** Available when @input="date" ONLY. Picker types
    * @default "inline"
    */
-  modalVariant?: "dialog" | "inline" | "static";
+  modalVariant?: 'dialog' | 'inline' | 'static';
 
   /** Available when @input="select" ONLY - Multi-Select input style.
    * if you use "default" property with this, make sure your "default" property is an instance of Array
    */
-  multiple?: "chips" | "default";
+  multiple?: 'chips' | 'default';
   /** Available when @input="select" ONLY - display loading spinner instead of expand arrow */
   loading?: boolean;
   /** Available when @input="select" ONLY - Custom error message */
@@ -110,7 +110,7 @@ export interface FieldProps {
   config?: FieldInputProps;
 }
 export type ProcessedEvent = CalendarEvent & Record<string, any>;
-export type EventActions = "create" | "edit";
+export type EventActions = 'create' | 'edit';
 export type DefaultRecourse = {
   assignee?: string | number;
   text?: string;
@@ -157,10 +157,7 @@ export interface SchedulerProps {
   /**Table loading state */
   loading?: boolean;
   /**Async function triggered when add/edit event */
-  onConfirm?(
-    event: ProcessedEvent,
-    action: EventActions
-  ): Promise<ProcessedEvent>;
+  onConfirm?(event: ProcessedEvent, action: EventActions): Promise<ProcessedEvent>;
   /**Async function triggered when delete event */
   onDelete?(deletedId: string | number): Promise<string | number | void>;
   /**Override editor modal */
@@ -180,13 +177,13 @@ export interface SchedulerProps {
   /**Resource header view mode
    * @default "default"
    */
-  resourceViewMode: "default" | "tabs";
+  resourceViewMode: 'default' | 'tabs';
   /**Direction of table */
-  direction: "rtl" | "ltr";
+  direction: 'rtl' | 'ltr';
   /**Edito dialog maxWith
    * @default "md"
    */
-  dialogMaxWidth: DialogProps["maxWidth"];
+  dialogMaxWidth: DialogProps['maxWidth'];
   /**
    * date-fns Locale object
    */
@@ -197,7 +194,7 @@ export interface SchedulerProps {
   onEventDrop?(
     droppedOn: Date,
     updatedEvent: ProcessedEvent,
-    originalEvent: ProcessedEvent
+    originalEvent: ProcessedEvent,
   ): Promise<ProcessedEvent | void>;
 }
 export interface Scheduler extends Partial<SchedulerProps> {}

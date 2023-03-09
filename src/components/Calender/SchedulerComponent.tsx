@@ -1,26 +1,26 @@
-import { Week } from "./views/Week";
-import { Navigation } from "./components/nav/Navigation";
-import { useAppState } from "./hooks/useAppState";
-import Editor from "./views/Editor";
-import { CircularProgress, Typography } from "@mui/material";
-import { Month } from "./views/Month";
-import { Day } from "./views/Day";
-import { Table, Wrapper } from "./styles/styles";
-import { useMemo } from "react";
+import { Week } from './views/Week';
+import { Navigation } from './components/nav/Navigation';
+import { useAppState } from './hooks/useAppState';
+import Editor from './views/Editor';
+import { CircularProgress, Typography } from '@mui/material';
+import { Month } from './views/Month';
+import { Day } from './views/Day';
+import { Table, Wrapper } from './styles/styles';
+import { useMemo } from 'react';
 
 const SchedulerComponent = () => {
   const { loading, view, dialog, resources, resourceViewMode } = useAppState();
 
   const Views = useMemo(() => {
     switch (view) {
-      case "month":
+      case 'month':
         return <Month />;
-      case "week":
+      case 'week':
         return <Week />;
-      case "day":
+      case 'day':
         return <Day />;
       default:
-        return "";
+        return '';
     }
   }, [view]);
 
@@ -36,11 +36,7 @@ const SchedulerComponent = () => {
       )}
       <Navigation />
       <div className="rs__outer_table">
-        <Table
-          resource_count={resourceViewMode === "tabs" ? 1 : resources.length}
-        >
-          {Views}
-        </Table>
+        <Table resource_count={resourceViewMode === 'tabs' ? 1 : resources.length}>{Views}</Table>
       </div>
       {dialog && <Editor />}
     </Wrapper>
